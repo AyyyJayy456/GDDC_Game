@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private int speed, sprintSpeed;
-    
+
     private bool isSprinting = false;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -23,14 +23,12 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         int speedMultiplier = isSprinting ? sprintSpeed : speed;
-
         rb.linearVelocity = new Vector2(speedMultiplier * horizontal, speedMultiplier * vertical);
     }
 
 
     public void Move(InputAction.CallbackContext context)
     {
-
         horizontal = context.ReadValue<Vector2>().x;
         vertical = context.ReadValue<Vector2>().y;
     }
