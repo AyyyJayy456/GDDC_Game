@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerAwarenessController : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PlayerAwarenessController : MonoBehaviour
     public Vector2 DirectionToPlayer { get; private set; }
 
     [SerializeField]
-    private float _playerAwarenessDistance;
+    private float _playerAwarenessDistance, _triggerBattleScene;
 
     private Transform _player;
 
@@ -24,7 +25,13 @@ public class PlayerAwarenessController : MonoBehaviour
         Vector2 enemyToPlayerVector = _player.position - transform.position;
         DirectionToPlayer = enemyToPlayerVector.normalized;
 
-        if (enemyToPlayerVector.magnitude <= _playerAwarenessDistance)
+        float distance = enemyToPlayerVector.magnitude;
+
+        if (distance <= _triggerBattleScene)
+        {
+            SceneManager.LoadScene("Battle Scene");
+        }
+        else if (distance <= _playerAwarenessDistance)
         {
             AwareOfPlayer = true;
         }
